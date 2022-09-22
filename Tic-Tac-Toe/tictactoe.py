@@ -107,15 +107,46 @@ def result(board, action):
     
     return board_clone
 
-
     # raise NotImplementedError
 
+# Helpler function to check who wins
+def winnercheck(board, player):
+    
+    for row in range(len(board)):
+
+        # Check to all the columns to see if they form 3 O's or 3 X's in consecutive order
+        if board[0][row] == player and board[1][row] == player and board[2][row] == player:
+            return player 
+        
+        # Check to all the rows to see if they form 3 O's or 3 X's in consecutive order
+        elif board[row][0] == player and board[row][1] == player and board[row][2] == player: 
+            return player
+
+    # Check all the Diagonals to see if they form 3 O's or 3 X's in consecutive order
+    if board[0][0] == player and board[1][1] == player and board[2][2] == player:
+        return player
+    elif board[0][2] == player and board[1][1] == player and board[2][0] == player: 
+        return player
 
 def winner(board):
     """
     Returns the winner of the game, if there is one.
     """
-    raise NotImplementedError
+    # Use the helper function to check to see if X or O won
+    x_won = winnercheck(board, X) 
+    o_won = winnercheck(board, O)
+
+    # Check if X won then return X
+    if x_won == X: 
+        return X
+    # Check if O won then return O
+    elif o_won == O:
+        return O
+    # If X and O did not win then return None 
+    else: 
+        return None
+
+    # raise NotImplementedError
 
 
 def terminal(board):
