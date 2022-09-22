@@ -3,11 +3,18 @@ Tic Tac Toe Player
 """
 
 import math
+import copy
 
 X = "X"
 O = "O"
 EMPTY = None
 
+# Raise Exception Class to display if an action is not valid
+class NotValidActionError(Exception): 
+    def __init__(self, action):
+        self.action = action
+        self.message = f"This action, {self.action}, is not valid"
+        super().__init__(self.message)
 
 def initial_state():
     """
@@ -61,14 +68,47 @@ def actions(board):
     """
     Returns set of all possible actions (i, j) available on the board.
     """
-    raise NotImplementedError
+    # Create a set to store all the possible available action
+    possible_actions = []
+    # For each (i, j) in board: 
+    for row in range(len(board)):
+        for col in range(len(board[row])): 
+             # If (i, j) == EMPTY:
+            if board[row][col] == EMPTY:
+                # Append to the (i, j) to a set 
+                possible_actions.append((row,col))
+
+    # Return all possible available action            
+    return possible_actions
+
+    # raise NotImplementedError
 
 
 def result(board, action):
     """
     Returns the board that results from making move (i, j) on the board.
     """
-    raise NotImplementedError
+
+    # Keep a deep copy of the board 
+    board_clone = copy.deepcopy(board)
+
+    # Grab the current player
+    current_player = player(board_clone)
+
+    row, col = action
+
+    # If action is not valid 
+    if board_clone[row][col] != EMPTY: 
+        raise NotValidActionError(action)
+
+    # Update the board with the action and current player
+    else:
+        board_clone[row][col] = current_player
+    
+    return board_clone
+
+
+    # raise NotImplementedError
 
 
 def winner(board):
