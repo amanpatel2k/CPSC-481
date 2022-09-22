@@ -153,14 +153,48 @@ def terminal(board):
     """
     Returns True if game is over, False otherwise.
     """
-    raise NotImplementedError
+
+    # Grab the winner of the given board
+    win = winner(board)
+
+    # If the winner is X or O
+    if win == X or win == O:
+        # Return True 
+        return True 
+
+    # Check to see if there is a TIE game 
+    for row in board:
+        # If EMPTY exists in the board then return False 
+        if EMPTY in row: 
+            return False
+            
+    # Return True if there is a TIE game 
+    return True 
+
+    # raise NotImplementedError
 
 
 def score(board):
     """
     Returns 1 if X has won the game, -1 if O has won, 0 otherwise.
     """
-    raise NotImplementedError
+
+    win = winner(board)
+
+    # Check to see if X won 
+    if win == X:
+        # If X won then return 1
+        return 1
+    # Check to see if O won 
+    elif win == O:
+        # If O won then return -1
+        return -1
+    # Check to see if it is tie game
+    else:
+        # If no winner then return 0
+        return 0
+
+    # raise NotImplementedError
 
 
 def minimax(board):
