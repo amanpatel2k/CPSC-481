@@ -167,7 +167,7 @@ def terminal(board):
         # If EMPTY exists in the board then return False 
         if EMPTY in row: 
             return False
-            
+
     # Return True if there is a TIE game 
     return True 
 
@@ -201,4 +201,76 @@ def minimax(board):
     """
     Returns the optimal action for the current player on the board.
     """
-    raise NotImplementedError
+    def max_value(board):
+        
+        # Grab all possible actions from board 
+        possible_actions = actions(board)
+
+        # Keep track of the best action
+        best_action = ()
+
+        # If terminal board then return the score and best action
+        if terminal(board) == True:
+            return score(board), best_action
+
+        # Set max value to negative infinity
+        max_value = -math.inf
+        # For all action in the possible actions
+        for action in possible_actions: 
+            # Grab the maximum value from either min_value function or from the max_value
+            current_value = max(max_value, min_value((result(board, action)))[0])
+            # If current value is greater then max_value 
+            if current_value > max_value: 
+                # Update the max value and the best action
+                max_value = current_value
+                best_action = action
+
+        # Return the max value and best action
+        return max_value, best_action
+
+    def min_value(board):
+ 
+        # Grab all possible actions from board 
+        possible_actions = actions(board)
+        
+        # Keep track of the best action
+        best_action = ()
+
+        # If terminal board then return the score and best action
+        if terminal(board) == True:
+            return score(board), best_action
+
+        # Set min value to positive infinity
+        min_value = math.inf
+
+        # For all action in the possible actions
+        for action in possible_actions: 
+            # Grab the minimum value from either max_value function or from the min_value
+            current_value = min(min_value, max_value((result(board, action)))[0])
+            # If current value is less then min_value 
+            if current_value < min_value: 
+                # Update the min value and the best action
+                min_value = current_value
+                best_action = action
+        
+        # Return the max value and best action
+        return min_value, best_action
+
+
+    # Grab the current player from the board
+    currentplayer = player(board)
+
+    # If board is a terminal board then return None
+    if terminal(board) == None: 
+        return None 
+
+    # If current player is X then call the max value function
+    if currentplayer == X: 
+        # Return the best action from the max value function
+        return max_value(board)[1]
+    # Else call the min value function
+    else:
+        # Return the best action from the min value function
+        return min_value(board)[1]
+
+    # raise NotImplementedError
