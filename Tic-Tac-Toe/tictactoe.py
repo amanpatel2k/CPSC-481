@@ -61,8 +61,6 @@ def player(board):
             # X Turn
             return X
 
-    # raise NotImplementedError
-
 
 def actions(board):
     """
@@ -80,8 +78,6 @@ def actions(board):
 
     # Return all possible available action            
     return possible_actions
-
-    # raise NotImplementedError
 
 
 def result(board, action):
@@ -107,7 +103,6 @@ def result(board, action):
     
     return board_clone
 
-    # raise NotImplementedError
 
 # Helpler function to check who wins
 def winnercheck(board, player):
@@ -146,8 +141,6 @@ def winner(board):
     else: 
         return None
 
-    # raise NotImplementedError
-
 
 def terminal(board):
     """
@@ -171,8 +164,6 @@ def terminal(board):
     # Return True if there is a TIE game 
     return True 
 
-    # raise NotImplementedError
-
 
 def score(board):
     """
@@ -193,8 +184,6 @@ def score(board):
     else:
         # If no winner then return 0
         return 0
-
-    # raise NotImplementedError
 
 
 def minimax(board):
@@ -273,4 +262,3 @@ def minimax(board):
         # Return the best action from the min value function
         return min_value(board)[1]
 
-    # raise NotImplementedError
