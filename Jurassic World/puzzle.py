@@ -57,6 +57,25 @@ knowledge2 = And(
 # C says "A is a Truthoraptor."
 knowledge3 = And(
     # TODO
+    Not(And(ATruthoraptor, ALieosaurus)), # cannot be Truthoraptor and Lieosaurus at the same time
+    Or(ATruthoraptor, ALieosaurus), # Will be Truthoraptor or Lieosaurus
+    Not(And(BTruthoraptor, BLieosaurus)), # cannot be Truthoraptor and Lieosaurus at the same time
+    Or(BTruthoraptor, BLieosaurus), # Will be Truthoraptor or Lieosaurus
+    Not(And(CTruthoraptor, CLieosaurus)), # cannot be Truthoraptor and Lieosaurus at the same time
+    Or(CTruthoraptor, CLieosaurus), # Will be Truthoraptor or Lieosaurus
+
+    Implication(ATruthoraptor, Or(ATruthoraptor, ALieosaurus)),
+    Implication(ALieosaurus, Not(Or(ATruthoraptor, ALieosaurus))),
+
+    Implication(BTruthoraptor, Implication(ATruthoraptor, ALieosaurus)),
+    Implication(BLieosaurus, Not(Implication(ATruthoraptor, ALieosaurus))),
+
+    Implication(BTruthoraptor, CLieosaurus),
+    Implication(BLieosaurus, Not(CLieosaurus)),
+
+    Implication(CTruthoraptor, ATruthoraptor),
+    Implication(CLieosaurus, Not(ATruthoraptor))
+  
 )
 
 
