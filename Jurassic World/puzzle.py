@@ -39,6 +39,15 @@ knowledge1 = And(
 # B says "We are of different kinds."
 knowledge2 = And(
     # TODO
+    Not(And(ATruthoraptor, ALieosaurus)), # cannot be Truthoraptor and Lieosaurus at the same time
+    Or(ATruthoraptor, ALieosaurus), # Will be Truthoraptor or Lieosaurus
+    Not(And(BTruthoraptor, BLieosaurus)), # cannot be Truthoraptor and Lieosaurus at the same time
+    Or(BTruthoraptor, BLieosaurus), # Will be Truthoraptor or Lieosaurus
+
+    Implication(ATruthoraptor, Or(And(ATruthoraptor, BTruthoraptor), And(ALieosaurus, BLieosaurus))),
+    Implication(ALieosaurus, Not(Or(And(ATruthoraptor, BTruthoraptor), And(ALieosaurus, BLieosaurus)))),
+    Implication(BTruthoraptor, Or(And(ATruthoraptor, BLieosaurus), And(ALieosaurus, BTruthoraptor))),
+    Implication(BLieosaurus, Not(Or(And(ATruthoraptor, BLieosaurus), And(ALieosaurus, BTruthoraptor))))
 )
 
 # Puzzle 3
