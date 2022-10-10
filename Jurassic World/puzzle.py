@@ -12,14 +12,26 @@ CLieosaurus = Symbol("C is a Lieosaurus")
 # Puzzle 0
 # A says "I am both a Truthoraptor and a Lieosaurus."
 knowledge0 = And(
-    # TODO
+    # TODO 
+    Not(And(ATruthoraptor, ALieosaurus)), # cannot be Truthoraptor and Lieosaurus at the same time
+    Or(ATruthoraptor, ALieosaurus), # Will be Truthoraptor or Lieosaurus
+    Implication(ATruthoraptor, And(ATruthoraptor, ALieosaurus)), # If ATruthoraptor is speaking then its both a Truthoraptor and a Lieosaurus
+    Implication(ALieosaurus, Not(And(ATruthoraptor, ALieosaurus))) # If ALieosaurus is speaking then its not both a Truthoraptor and a Lieosaurus
 )
 
 # Puzzle 1
 # A says "We are both Lieosauruss."
 # B says nothing.
+
 knowledge1 = And(
     # TODO
+    Not(And(ATruthoraptor, ALieosaurus)), # cannot be Truthoraptor and Lieosaurus at the same time
+    Or(ATruthoraptor, ALieosaurus), # Will be Truthoraptor or Lieosaurus
+    Not(And(BTruthoraptor, BLieosaurus)), # cannot be Truthoraptor and Lieosaurus at the same time
+    Or(BTruthoraptor, BLieosaurus), # Will be Truthoraptor or Lieosaurus
+
+    Implication(ATruthoraptor, And(ALieosaurus, BLieosaurus)), 
+    Implication(ALieosaurus, Not(And(ALieosaurus, BLieosaurus)))
 )
 
 # Puzzle 2
