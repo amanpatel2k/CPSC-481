@@ -15,8 +15,11 @@ knowledge0 = And(
     # TODO 
     Not(And(ATruthoraptor, ALieosaurus)), # cannot be Truthoraptor and Lieosaurus at the same time
     Or(ATruthoraptor, ALieosaurus), # Will be Truthoraptor or Lieosaurus
-    Implication(ATruthoraptor, And(ATruthoraptor, ALieosaurus)), # If ATruthoraptor is speaking then its both a Truthoraptor and a Lieosaurus
-    Implication(ALieosaurus, Not(And(ATruthoraptor, ALieosaurus))) # If ALieosaurus is speaking then its not both a Truthoraptor and a Lieosaurus
+
+    # If ATruthoraptor is speaking then its both a Truthoraptor and a Lieosaurus
+    Implication(ATruthoraptor, And(ATruthoraptor, ALieosaurus)), 
+    # If ALieosaurus is speaking then its not both a Truthoraptor and a Lieosaurus
+    Implication(ALieosaurus, Not(And(ATruthoraptor, ALieosaurus)))
 )
 
 # Puzzle 1
@@ -30,7 +33,9 @@ knowledge1 = And(
     Not(And(BTruthoraptor, BLieosaurus)), # cannot be Truthoraptor and Lieosaurus at the same time
     Or(BTruthoraptor, BLieosaurus), # Will be Truthoraptor or Lieosaurus
 
+    # If ATruthoraptor speaks, then they are both ALieosaurus and BLieosaurus
     Implication(ATruthoraptor, And(ALieosaurus, BLieosaurus)), 
+    # If ALieosaurus speaks, then they not both ALieosaurus and BLieosaurus
     Implication(ALieosaurus, Not(And(ALieosaurus, BLieosaurus)))
 )
 
@@ -39,14 +44,19 @@ knowledge1 = And(
 # B says "We are of different kinds."
 knowledge2 = And(
     # TODO
-    Not(And(ATruthoraptor, ALieosaurus)), # cannot be Truthoraptor and Lieosaurus at the same time
-    Or(ATruthoraptor, ALieosaurus), # Will be Truthoraptor or Lieosaurus
-    Not(And(BTruthoraptor, BLieosaurus)), # cannot be Truthoraptor and Lieosaurus at the same time
-    Or(BTruthoraptor, BLieosaurus), # Will be Truthoraptor or Lieosaurus
+    Not(And(ATruthoraptor, ALieosaurus)), # cannot be ATruthoraptor and ALieosaurus at the same time
+    Or(ATruthoraptor, ALieosaurus), # Will be ATruthoraptor or ALieosaurus
+    Not(And(BTruthoraptor, BLieosaurus)), # cannot be BTruthoraptor and BLieosaurus at the same time
+    Or(BTruthoraptor, BLieosaurus), # Will be BTruthoraptor or BLieosaurus
 
+    # If ATruthoraptor speaks, then they are the same kind of (ATruthoraptor and BTruthoraptor) or (ALieosaurus and BLieosaurus)
     Implication(ATruthoraptor, Or(And(ATruthoraptor, BTruthoraptor), And(ALieosaurus, BLieosaurus))),
+     # If ATruthoraptor speaks, then they are not the same kind 
     Implication(ALieosaurus, Not(Or(And(ATruthoraptor, BTruthoraptor), And(ALieosaurus, BLieosaurus)))),
+
+    # If BTruthoraptor speaks, then they are different kind of (ATruthoraptor and BLieosaurus) or (ALieosaurus and BTruthoraptor)
     Implication(BTruthoraptor, Or(And(ATruthoraptor, BLieosaurus), And(ALieosaurus, BTruthoraptor))),
+     # If BTruthoraptor speaks, then they are not different kind 
     Implication(BLieosaurus, Not(Or(And(ATruthoraptor, BLieosaurus), And(ALieosaurus, BTruthoraptor))))
 )
 
@@ -57,23 +67,31 @@ knowledge2 = And(
 # C says "A is a Truthoraptor."
 knowledge3 = And(
     # TODO
-    Not(And(ATruthoraptor, ALieosaurus)), # cannot be Truthoraptor and Lieosaurus at the same time
-    Or(ATruthoraptor, ALieosaurus), # Will be Truthoraptor or Lieosaurus
-    Not(And(BTruthoraptor, BLieosaurus)), # cannot be Truthoraptor and Lieosaurus at the same time
-    Or(BTruthoraptor, BLieosaurus), # Will be Truthoraptor or Lieosaurus
-    Not(And(CTruthoraptor, CLieosaurus)), # cannot be Truthoraptor and Lieosaurus at the same time
-    Or(CTruthoraptor, CLieosaurus), # Will be Truthoraptor or Lieosaurus
+    Not(And(ATruthoraptor, ALieosaurus)), # cannot be ATruthoraptor and ALieosaurus at the same time
+    Or(ATruthoraptor, ALieosaurus), # Will be ATruthoraptor or ALieosaurus
+    Not(And(BTruthoraptor, BLieosaurus)), # cannot be BTruthoraptor and BLieosaurus at the same time
+    Or(BTruthoraptor, BLieosaurus), # Will be BTruthoraptor or BLieosaurus
+    Not(And(CTruthoraptor, CLieosaurus)), # cannot be CTruthoraptor and CLieosaurus at the same time
+    Or(CTruthoraptor, CLieosaurus), # Will be CTruthoraptor or CLieosaurus
 
+    # If ATruthorapoter speaks, then they are either a ATruthoraptor or ALieosaurus
     Implication(ATruthoraptor, Or(ATruthoraptor, ALieosaurus)),
+    # If ATruthorapoter speaks, then they are not a ATruthoraptor or a ALieosaurus
     Implication(ALieosaurus, Not(Or(ATruthoraptor, ALieosaurus))),
 
+    # If BTruthoraptor speaks, then a Truthoraptor says that it is a Lieosaurus
     Implication(BTruthoraptor, Implication(ATruthoraptor, ALieosaurus)),
+    # If BLieosaurus speaks, then a Truthoraptor says that it is not a Lieosaurus
     Implication(BLieosaurus, Not(Implication(ATruthoraptor, ALieosaurus))),
 
+    # If BTruthoraptor speaks, then it is a CLieosaurus
     Implication(BTruthoraptor, CLieosaurus),
+     # If BLieosaurus speaks, then it is not a CLieosaurus
     Implication(BLieosaurus, Not(CLieosaurus)),
 
+    # If CTruthoraptor speaks, then it is a ATruthoraptor
     Implication(CTruthoraptor, ATruthoraptor),
+    # If CLieosaurus speaks, then it is not a ATruthoraptor
     Implication(CLieosaurus, Not(ATruthoraptor))
   
 )
