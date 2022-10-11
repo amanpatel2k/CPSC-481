@@ -79,10 +79,10 @@ knowledge3 = And(
     # If ATruthorapoter speaks, then they are not a ATruthoraptor or a ALieosaurus
     Implication(ALieosaurus, Not(Or(ATruthoraptor, ALieosaurus))),
 
-    # If BTruthoraptor speaks, then a Truthoraptor says that it is a Lieosaurus
-    Implication(BTruthoraptor, Implication(ATruthoraptor, ALieosaurus)),
-    # If BLieosaurus speaks, then a Truthoraptor says that it is not a Lieosaurus
-    Implication(BLieosaurus, Not(Implication(ATruthoraptor, ALieosaurus))),
+    # If BTruthoraptor speaks, then a Truthoraptor or Lieosaurus says that it is a Lieosaurus
+    Implication(BTruthoraptor, Implication(Or(ATruthoraptor,ALieosaurus), ALieosaurus)),
+    # If BLieosaurus speaks, then a Truthoraptor or Lieosaurus says that it is not a Lieosaurus
+    Implication(BLieosaurus, Not(Implication(Or(ATruthoraptor,ALieosaurus), ALieosaurus))),
 
     # If BTruthoraptor speaks, then it is a CLieosaurus
     Implication(BTruthoraptor, CLieosaurus),
