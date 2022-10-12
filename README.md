@@ -3,7 +3,7 @@
 Project In AI
 
 Project # 1 -> Tic Tac Toe 
-    -> Using Minimax and Alpha Beta Pruning
+    -> Using Minimax (Completed)
 
 Project # 2 -> Jurassic World 
     -> Using Propositional Logic (In Progress)
