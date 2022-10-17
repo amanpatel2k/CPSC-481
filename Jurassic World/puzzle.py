@@ -67,7 +67,7 @@ knowledge2 = And(
 # A says either "I am a Truthoraptor." or "I am a Lieosaurus.", but you don't know which.
 # B says "A said 'I am a Lieosaurus'."
 # B says "C is a Lieosaurus."
-# C says "A is a Truthoraptor."
+# C says "A is a Truthoraptor."  
 knowledge3 = And(
     # TODO
     Not(And(ATruthoraptor, ALieosaurus)), # cannot be ATruthoraptor and ALieosaurus at the same time
@@ -77,17 +77,41 @@ knowledge3 = And(
     Not(And(CTruthoraptor, CLieosaurus)), # cannot be CTruthoraptor and CLieosaurus at the same time
     Or(CTruthoraptor, CLieosaurus), # Will be CTruthoraptor or CLieosaurus
 
-    # If ATruthorapoter speaks, then they are either a ATruthoraptor or ALieosaurus
-    Implication(ATruthoraptor, Or(ATruthoraptor, ALieosaurus)),
-    Implication(ALieosaurus, Not(Or(ATruthoraptor, ALieosaurus))),
+    # A is a Truthoraptor
+    Or(
+        # "I am a Truthoraptor."
+        And(Implication(ATruthoraptor, ATruthoraptor), Implication(ALieosaurus, Not(ATruthoraptor))),
+        
+        # "I am a Lieosaurus."
+        And(Implication(ATruthoraptor, ALieosaurus), Implication(ALieosaurus, Not(ALieosaurus)))
+    ),
 
-    # If BTruthoraptor speaks, then a Truthoraptor and Lieosaurus says that it is a Lieosaurus
-    Implication(BTruthoraptor, And(Implication(ATruthoraptor,ALieosaurus), Implication(ALieosaurus, Not(ALieosaurus)))),
-    # Implication(BTruthoraptor, Implication(ALieosaurus, Not(ALieosaurus))),
-    # If BLieosaurus speaks, then a Truthoraptor or Lieosaurus says that it is not a Lieosaurus
-    # Implication(BLieosaurus, Not(Implication(ATruthoraptor, ALieosaurus))),
-    Implication(BLieosaurus, Not(And(Implication(ATruthoraptor,ALieosaurus), Implication(ALieosaurus, Not(ALieosaurus))))),
+    # A is a ALieosaurus
+    Not(And(
+        # "I am a Truthoraptor."
+        And(Implication(ATruthoraptor, ATruthoraptor), Implication(ALieosaurus, Not(ATruthoraptor))),
+        
+        # "I am a Lieosaurus."
+        And(Implication(ATruthoraptor, ALieosaurus), Implication(ALieosaurus, Not(ALieosaurus)))
+    )),
 
+    # B is BTruthoraptor
+    Implication(BTruthoraptor, And(
+        # A is ATruthoraptor then 'I am a Lieosaurus'."
+        Implication(ATruthoraptor,ALieosaurus), 
+        # A is ALieosaurus then 'I am a Lieosaurus'."
+        Implication(ALieosaurus, Not(ALieosaurus))
+        )
+    ),
+    
+    # B is BLieosaurus
+    Implication(BTruthoraptor, And(
+        # A is ATruthoraptor then 'I am a Lieosaurus'."
+        Implication(ATruthoraptor,ALieosaurus), 
+        # A is ALieosaurus then 'I am a Lieosaurus'."
+        Implication(ALieosaurus, Not(ALieosaurus))
+        )
+    ),
 
     # If BTruthoraptor speaks, then it is a CLieosaurus
     Implication(BTruthoraptor, CLieosaurus),
