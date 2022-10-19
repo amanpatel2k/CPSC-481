@@ -99,19 +99,20 @@ knowledge3 = And(
     Implication(BTruthoraptor, And(
         # A is ATruthoraptor then 'I am a Lieosaurus'."
         Implication(ATruthoraptor,ALieosaurus), 
-        # A is ALieosaurus then 'I am a Lieosaurus'."
+        # A is ALieosaurus then 'I am a not Lieosaurus'."
         Implication(ALieosaurus, Not(ALieosaurus))
         )
     ),
+
     
     # B is BLieosaurus
-    Implication(BTruthoraptor, And(
+    Implication(BLieosaurus, Not(And(
         # A is ATruthoraptor then 'I am a Lieosaurus'."
         Implication(ATruthoraptor,ALieosaurus), 
         # A is ALieosaurus then 'I am a Lieosaurus'."
         Implication(ALieosaurus, Not(ALieosaurus))
         )
-    ),
+    )),
 
     # If BTruthoraptor speaks, then it is a CLieosaurus
     Implication(BTruthoraptor, CLieosaurus),
