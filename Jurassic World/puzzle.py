@@ -1,3 +1,9 @@
+"""
+Project 2: Krishna's Jurassic World 
+Due Date: October 28, 2022
+Group Members: Aman Patel, Alan Blandon, Ryan Williams, Kaylee Bliaya
+"""
+
 from logic import *
 
 ATruthoraptor = Symbol("A is a Truthoraptor")
@@ -35,7 +41,7 @@ knowledge1 = And(
 
     # If ATruthoraptor speaks, then they are both ALieosaurus and BLieosaurus
     Implication(ATruthoraptor, And(ALieosaurus, BLieosaurus)), 
-    # If ALieosaurus speaks, then they not both ALieosaurus and BLieosaurus
+    # If ALieosaurus speaks, then they are not both ALieosaurus and BLieosaurus
     Implication(ALieosaurus, Not(And(ALieosaurus, BLieosaurus)))
 )
 
@@ -50,16 +56,16 @@ knowledge2 = And(
     Or(BTruthoraptor, BLieosaurus), # Will be BTruthoraptor or BLieosaurus
 
 
-    # A is ATruthoraptor 
+    # A is ATruthoraptor then ATruthoraptor and BTruthoraptor are the same kind
     Implication(ATruthoraptor, And(ATruthoraptor, BTruthoraptor)),
 
-    # A is ALieosaurus
+    # A is ALieosaurus then ATruthoraptor and BTruthoraptor are not the same kind
     Implication(ALieosaurus, Not(And(ALieosaurus, BLieosaurus))),
 
-    # B is BTruthoraptor 
+    # B is BTruthoraptor then ALieosaurus and BTruthoraptor are different kinds
     Implication(BTruthoraptor, And(ALieosaurus, BTruthoraptor)),
 
-    # B is BLieosaurus
+    # B is BLieosaurus then ATruthoraptor and BLieosaurus are not different kinds
     Implication(BLieosaurus, Not(And(ATruthoraptor,BLieosaurus)))
 )
 
@@ -79,19 +85,19 @@ knowledge3 = And(
 
     # A is a Truthoraptor
     Or(
-        # "I am a Truthoraptor."
+        # If ATruthoraptor then I am a Truthoraptor and If ALieosaurus then I am not a Truthoraptor
         And(Implication(ATruthoraptor, ATruthoraptor), Implication(ALieosaurus, Not(ATruthoraptor))),
         
-        # "I am a Lieosaurus."
+        # If ATruthoraptor then I am a Lieosaurus and If ALieosaurus then I am not a Lieosaurus
         And(Implication(ATruthoraptor, ALieosaurus), Implication(ALieosaurus, Not(ALieosaurus)))
     ),
 
     # A is a ALieosaurus
     Not(And(
-        # "I am a Truthoraptor."
+        # If ATruthoraptor then I am a Truthoraptor and If ALieosaurus then I am not a Truthoraptor
         And(Implication(ATruthoraptor, ATruthoraptor), Implication(ALieosaurus, Not(ATruthoraptor))),
         
-        # "I am a Lieosaurus."
+        # If ATruthoraptor then I am a Lieosaurus and If ALieosaurus then I am not a Lieosaurus
         And(Implication(ATruthoraptor, ALieosaurus), Implication(ALieosaurus, Not(ALieosaurus)))
     )),
 
