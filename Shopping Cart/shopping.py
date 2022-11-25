@@ -62,7 +62,7 @@ def load_data(filename):
     """
 
     # # Open & Read The CSV File for the data
-    with open('shopping.csv', 'r') as f:
+    with open(filename, 'r') as f:
         reader = csv.reader(f)
         
         # Skipped the Header of the data
