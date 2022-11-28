@@ -1,3 +1,9 @@
+'''
+Project 3: Shopping Cart
+Group Members: Aman Patel, Johnson Tong, and Ryan Novoa
+Due Date: November 27, 2022
+'''
+
 import csv
 import sys
 import pandas as pd
@@ -151,10 +157,9 @@ def evaluate(labels, predictions):
 
     # Created 4 Variables -> positive, true_positive, negative, true_negative 
     positive = 0
-    true_positive = 0 
-
+    truly_positive = 0 
     negative = 0
-    true_negative = 0
+    truly_negative = 0
 
     # Looped through all the predicitions
     for index, pred in enumerate(predictions): 
@@ -164,18 +169,18 @@ def evaluate(labels, predictions):
             negative += 1
             # Check to see if the prediction was the same in the labels
             if labels[index] == pred:
-                true_negative += 1
+                truly_negative += 1
         
         # Check to see if the prediction was positive
         elif pred == 1: 
             positive += 1
             # Check to see if the prediction was the same in the labels
             if labels[index] == pred: 
-                true_positive += 1
+                truly_positive += 1
     
     # Calculated & Return Sensitivity and Specificity
-    sensitivity = true_positive / positive
-    specificity = true_negative / negative
+    sensitivity = truly_positive / positive
+    specificity = truly_negative / negative
 
     return (sensitivity, specificity)
 
